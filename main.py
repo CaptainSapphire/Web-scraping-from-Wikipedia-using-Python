@@ -21,8 +21,8 @@ headers = {
 }
 page = requests.get(url, headers=headers) # requests.get(): sends an HTTP GET request to the website.
 print(page.status_code) # page.status_code: returns 200 if the page loaded successfully.
-print(page.content) # page.content: returns the full HTML of the page.
-
+# print(page.content) # page.content: returns the full HTML of the page.
+# ^ Useful for the first run, don't need it beyond that.
 
 # parsing html
 soup = BeautifulSoup(page.content, 'html.parser')
