@@ -15,6 +15,7 @@ import scrapy # A full-featured, asynchronous web scraping framework built for s
 
 
 # Get webpages with requests
+topic = input("Enter a Wikipedia topic: ") 
 url = "https://en.wikipedia.org/wiki/Main_Page"
 headers = {
     "User-Agent": "Mozilla/5.0"
@@ -32,3 +33,7 @@ print(soup.prettify())
 print(soup.find_all('p'))
 print("\n\n")
 print(soup.find_all('p')[0].get_text())
+
+
+## Taking the project further
+# I want to be able to ask the terminal
