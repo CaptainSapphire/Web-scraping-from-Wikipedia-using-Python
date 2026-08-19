@@ -13,10 +13,10 @@ import scrapy # A full-featured, asynchronous web scraping framework built for s
 ## Workflow description
 ### document load --> parsing --> extraction --> transformation
 
-
 # Get webpages with requests
-topic = input("Enter a Wikipedia topic: ") 
-url = "https://en.wikipedia.org/wiki/Main_Page"
+topic = input("Enter a Wikipedia topic: ")
+url = f"https://en.wikipedia.org/wiki/{topic.replace(' ', '_')}"
+
 headers = {
     "User-Agent": "Mozilla/5.0"
 }
@@ -27,13 +27,19 @@ print(page.status_code) # page.status_code: returns 200 if the page loaded succe
 
 # parsing html
 soup = BeautifulSoup(page.content, 'html.parser')
-print(soup.prettify())
+
+# Commented this out so it doesn't flood your terminal with thousands of lines of HTML
+# print(soup.prettify()) 
 
 # extra the actual contents
-print(soup.find_all('p'))
+# print(soup.find_all('p')) # Commented out to prevent terminal flooding
 print("\n\n")
-print(soup.find_all('p')[0].get_text())
+
+# Wikipedia's first <p> tag is usually empty, so we look for the first one that actually has text
+for paragraph in soup.find_all('p'):
+    text = paragraph.get_text().strip()
+    if text: # If the paragraph is not completely empty
+        print(text)
+        break # Stop after printing the first real paragraph
 
 
-## Taking the project further
-# I want to be able to ask the terminal
